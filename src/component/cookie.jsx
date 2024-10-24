@@ -1,12 +1,12 @@
 import React, { useEffect, useState } from 'react';
 import Cookies from 'js-cookie';
 
-const App = () => {
+const Cookie = () => {
   const [cookieConsent, setCookieConsent] = useState(Cookies.get('cookieConsent'));
   const [analyticsEnabled, setAnalyticsEnabled] = useState(false);
 
   useEffect(() => {
-    // Check if user has previously accepted the cookie consent
+    
     if (cookieConsent === 'accepted') {
       enableGoogleAnalytics();
     } else {
@@ -14,24 +14,19 @@ const App = () => {
     }
   }, [cookieConsent]);
 
-  // Enable Google Analytics tracking
   const enableGoogleAnalytics = () => {
     setAnalyticsEnabled(true);
-    // Initialize or load Google Analytics here (you can paste your Google Analytics code)
     console.log('Google Analytics Enabled');
     window.dataLayer = window.dataLayer || [];
     function gtag() { window.dataLayer.push(arguments); }
     gtag('js', new Date());
-    gtag('config', 'G-XXXXXXXXXX'); // Replace with your GA Measurement ID
+    gtag('config', 'G-XHG58XMGTD'); 
   };
 
-  // Disable Google Analytics tracking
   const disableGoogleAnalytics = () => {
     setAnalyticsEnabled(false);
     console.log('Google Analytics Disabled');
-    // Optionally remove any Google Analytics script from the DOM
-    // Prevent analytics events from being sent
-    window['ga-disable-G-XXXXXXXXXX'] = true; // Replace with your GA Measurement ID
+    window['G-XHG58XMGTD'] = true; 
   };
 
   const handleAccept = () => {
@@ -46,25 +41,26 @@ const App = () => {
 
   return (
     <div>
-      <h1>React App with Cookie Consent for Google Analytics</h1>
+      <h1>Velkommen til mit cookie-projekt</h1>
+      <p>På 3 timer kan jeg ikke bygge en hjemmeside bedre end denne</p>
 
       {!cookieConsent && (
         <div className="cookie-consent">
-          <p>We use cookies to improve your experience. Do you accept the use of cookies for analytics?</p>
-          <button onClick={handleAccept}>Accept</button>
-          <button onClick={handleDeny}>Deny</button>
+          <p>Her bruger jeg cookies til at forbedre din oplevelse. Accepterer du brugen af ​​cookies til analyse?  </p>
+          <button onClick={handleAccept}>Jep</button>
+          <button onClick={handleDeny}>Ellers tak</button>
         </div>
       )}
 
       {cookieConsent === 'accepted' && analyticsEnabled && (
-        <p>Google Analytics is enabled and tracking.</p>
+        <p>Google Analytics er aktiveret og sporing.</p>
       )}
 
       {cookieConsent === 'denied' && (
-        <p>You have denied cookie consent for Google Analytics. Tracking is disabled.</p>
+        <p>Du har nægtet cookie-samtykke til Google Analytics. Så sporing er deaktiveret.</p>
       )}
     </div>
   );
 };
 
-export default App;
+export default Cookie;
